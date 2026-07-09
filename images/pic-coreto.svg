@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Coreto / prédio público">
+    <rect width="100" height="100" rx="16" fill="#F7B500"/>
+    <g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M24 42a26 20 0 0 1 52 0"/>
+        <path d="M30 42v38M70 42v38M30 80h40"/>
+        <path d="M42 42v38M58 42v38M50 42v38"/>
+    </g>
+</svg>
