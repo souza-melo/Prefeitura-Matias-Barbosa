@@ -25,7 +25,9 @@ colagem de pictogramas — **sem** campo de busca, que fica só no topo) →
 Cidadão / Empresa / Servidor que trocam o grid de cards) → **Indicadores
 municipais** (contadores) → **Notícias** (box `MateriaBox` do PortalFacil: slider
 `col-8` + lista estática `col-4` + "Veja mais", no padrão do portal de Colatina) →
-**Vídeos + Agenda** → **Telefones úteis** → **Rodapé** (Eu ♥ Matias + colunas + pictogramas).
+**Vídeos + Destaques** (canal de vídeos + 3 banners promocionais empilhados:
+Programa EducaCasa, Coronavírus, IPTU) → **Telefones úteis** → **Rodapé**
+(Eu ♥ Matias + colunas + pictogramas).
 
 > A seção de Notícias usa as **classes reais do `MateriaBox`** (`materia-box`,
 > `embla`, `materia-box-static-item`, `bt-vejamais`…), estilizadas conforme o

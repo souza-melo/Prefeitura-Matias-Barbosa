@@ -249,6 +249,13 @@
         .video-card .cap b{font-family:var(--ff-tit);font-size:.95rem;font-weight:700;display:block}
         .video-card .cap span{font-size:.78rem;color:var(--cinza)}
 
+        /* ---- Banners promocionais (Em destaque) ---- */
+        .promo-banner{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;background:#0E8A66;color:#fff;border-radius:var(--r-lg);padding:26px 22px;box-shadow:var(--sh-sm);transition:var(--tr)}
+        .promo-banner:hover{transform:translateY(-4px);box-shadow:var(--sh-md);color:#fff;filter:brightness(1.04)}
+        .promo-banner h3{font-family:var(--ff-tit);font-weight:800;font-size:1.5rem;letter-spacing:.02em;text-transform:uppercase;color:#fff;margin:0}
+        .promo-pill{display:inline-block;background:rgba(255,255,255,.22);color:#fff;font-weight:600;font-size:.92rem;padding:9px 24px;border-radius:var(--r-pill);transition:var(--tr)}
+        .promo-banner:hover .promo-pill{background:#fff;color:#0E8A66}
+
         /* ---- Agenda ---- */
         .agenda-item{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--linha);border-left:4px solid var(--cor,var(--azul));border-radius:var(--r);padding:14px 18px;box-shadow:var(--sh-sm);transition:var(--tr)}
         .agenda-item:hover{transform:translateX(4px);box-shadow:var(--sh-md)}
@@ -354,7 +361,7 @@
                     <a href="#" class="has">Governo <i class="fas fa-chevron-down"></i></a>
                     <a href="#servicos">Serviços</a>
                     <a href="#">Transparência</a>
-                    <a href="#agenda">Agenda</a>
+                    <a href="#videos">Vídeos</a>
                 </nav>
 
                 <div class="m-actions">
@@ -366,7 +373,7 @@
         </div>
         <nav class="mobilemenu" id="mobilemenu" aria-label="Menu principal (mobile)">
             <a href="#">Início</a><a href="#noticias">Notícias</a><a href="#">Governo</a>
-            <a href="#servicos">Serviços</a><a href="#">Transparência</a><a href="#agenda">Agenda</a>
+            <a href="#servicos">Serviços</a><a href="#">Transparência</a><a href="#videos">Vídeos</a>
         </nav>
     </header>
 
@@ -588,8 +595,8 @@
         </div>
     </section>
 
-    <!-- VÍDEOS + AGENDA -->
-    <section class="sec" id="agenda" aria-labelledby="vid-h">
+    <!-- VÍDEOS + DESTAQUES -->
+    <section class="sec" id="videos" aria-labelledby="vid-h">
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-7">
@@ -598,22 +605,19 @@
                         <a href="#" class="link-all">Ver canal <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="row g-3">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="video-card"><div class="video-thumb"><span class="live"><span class="b"></span> AO VIVO</span><span class="play"><i class="fas fa-play"></i></span></div><div class="cap"><b>Sessão da Câmara — ao vivo</b><span>Transmissão oficial</span></div></div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="video-card"><div class="video-thumb"><span class="play"><i class="fas fa-play"></i></span></div><div class="cap"><b>Prevenir a Dengue — vídeo premiado</b><span>28/06/2026</span></div></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="sec-head row-head">
-                        <div><span class="kick"><i class="fas fa-calendar-days"></i> Agenda</span><h2 style="font-size:1.6rem">Agenda da cidade</h2></div>
+                        <div><span class="kick"><i class="fas fa-bullhorn"></i> Em destaque</span><h2 style="font-size:1.6rem">Programas e avisos</h2></div>
                     </div>
                     <div class="d-flex flex-column gap-3">
-                        <div class="agenda-item" style="--cor:var(--verde)"><div class="ag-date"><div class="dia">08</div><div class="mes">Jul</div></div><div><span class="ag-cat">Saúde</span><h4 class="mt-1">Conselho Municipal de Saúde</h4><div class="ag-meta"><span><i class="fas fa-location-dot"></i> Auditório da Prefeitura</span><span><i class="fas fa-clock"></i> 14h</span></div></div></div>
-                        <div class="agenda-item" style="--cor:var(--amarelo)"><div class="ag-date"><div class="dia">15</div><div class="mes">Jul</div></div><div><span class="ag-cat">Cultura</span><h4 class="mt-1">Feira do Produtor Rural</h4><div class="ag-meta"><span><i class="fas fa-location-dot"></i> Praça Central</span><span><i class="fas fa-clock"></i> 08h</span></div></div></div>
-                        <div class="agenda-item" style="--cor:var(--azul)"><div class="ag-date"><div class="dia">22</div><div class="mes">Jul</div></div><div><span class="ag-cat">Audiência</span><h4 class="mt-1">Audiência Pública — LDO 2027</h4><div class="ag-meta"><span><i class="fas fa-location-dot"></i> Câmara Municipal</span><span><i class="fas fa-clock"></i> 19h</span></div></div></div>
+                        <a class="promo-banner" href="#"><h3>PROGRAMA EDUCASA</h3><span class="promo-pill">Atividades em formato digital</span></a>
+                        <a class="promo-banner" href="#"><h3>CORONAVÍRUS</h3><span class="promo-pill">O que você precisa saber</span></a>
+                        <a class="promo-banner" href="#"><h3>IPTU</h3><span class="promo-pill">Informações</span></a>
                     </div>
                 </div>
             </div>
