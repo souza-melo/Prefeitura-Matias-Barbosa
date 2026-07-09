@@ -83,7 +83,15 @@
         .mainnav{margin-left:auto;display:flex;align-items:center;gap:2px}
         .mainnav a{font-family:var(--ff-tit);font-weight:600;font-size:.92rem;color:var(--tinta);padding:10px 14px;border-radius:var(--r-pill);position:relative}
         .mainnav a:hover,.mainnav a.on{color:var(--azul);background:var(--azul-clr)}
-        .mainnav a.has i{font-size:.7rem;margin-left:4px}
+        .mainnav a.has i{font-size:.7rem;margin-left:4px;transition:var(--tr)}
+        /* Dropdown do menu (Governo) */
+        .nav-dd{position:relative}
+        .nav-dd-menu{position:absolute;top:calc(100% + 8px);left:0;min-width:230px;background:#fff;border:1px solid var(--linha);border-radius:16px;box-shadow:var(--sh-lg);padding:8px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .26s ease,transform .26s ease;z-index:1200}
+        .nav-dd:hover .nav-dd-menu,.nav-dd:focus-within .nav-dd-menu,.nav-dd-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
+        .nav-dd:hover a.has i,.nav-dd:focus-within a.has i{transform:rotate(180deg)}
+        .nav-dd:hover a.has,.nav-dd:focus-within a.has{color:var(--azul);background:var(--azul-clr)}
+        .mainnav .nav-dd-menu a{display:block;padding:10px 14px;border-radius:10px;font-family:var(--ff-tit);font-weight:600;font-size:.88rem;color:var(--tinta)}
+        .mainnav .nav-dd-menu a:hover{background:var(--azul-clr);color:var(--azul)}
         .m-actions{display:flex;align-items:center;gap:10px}
         .btn-search{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--linha);background:#fff;color:var(--azul);cursor:pointer;transition:var(--tr)}
         .btn-search:hover{background:var(--azul-clr);border-color:var(--azul)}
@@ -122,7 +130,7 @@
         .hero .container{position:relative;z-index:2;padding-top:56px;padding-bottom:104px}
         .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--linha);box-shadow:var(--sh-sm);color:var(--azul);font-family:var(--ff-tit);font-weight:700;font-size:.78rem;letter-spacing:.06em;padding:8px 16px;border-radius:var(--r-pill)}
         .hero-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--amarelo)}
-        .hero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:800;letter-spacing:-.02em;margin:18px 0 14px}
+        .hero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:bold;letter-spacing:-.02em;margin:18px 0 14px}
         .hero h1 .g{color:var(--azul)}
         .hero-sub{font-size:1.1rem;color:var(--cinza);max-width:520px;margin-bottom:26px}
         .hero-search{display:flex;background:#fff;border:1px solid var(--linha);border-radius:var(--r-pill);padding:8px;box-shadow:var(--sh-md);max-width:560px}
@@ -139,7 +147,7 @@
         /* ---- Section base ---- */
         section{scroll-margin-top:96px}
         .sec{padding:74px 0}
-        .sec-head{margin-bottom:36px}
+        .sec-head{margin-bottom:26px}
         .sec-head .kick{font-family:var(--ff-tit);font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--verde);display:inline-flex;align-items:center;gap:8px}
         .sec-head h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;letter-spacing:-.02em;margin:8px 0 0}
         .sec-head p{color:var(--cinza);margin:8px 0 0}
@@ -358,7 +366,16 @@
                 <nav class="mainnav" id="mainnav" aria-label="Menu principal">
                     <a href="#" class="on">Início</a>
                     <a href="#noticias">Notícias</a>
-                    <a href="#" class="has">Governo <i class="fas fa-chevron-down"></i></a>
+                    <div class="nav-dd">
+                        <a href="#" class="has" aria-haspopup="true" aria-expanded="false">Governo <i class="fas fa-chevron-down"></i></a>
+                        <div class="nav-dd-menu">
+                            <a href="#">Estrutura de Governo</a>
+                            <a href="#">Secretarias</a>
+                            <a href="#">Prefeito e Vice-prefeito</a>
+                            <a href="#">Conselhos Municipais</a>
+                            <a href="#">Legislação</a>
+                        </div>
+                    </div>
                     <a href="#servicos">Serviços</a>
                     <a href="#">Transparência</a>
                     <a href="#videos">Vídeos</a>
@@ -679,43 +696,55 @@
         var d=document;
         d.getElementById('ano').textContent=new Date().getFullYear();
 
-        // Masthead sticky shadow + back to top
+        // Masthead sticky shadow + back to top  (com null-checks defensivos)
         var mh=d.getElementById('masthead'), tt=d.getElementById('totop');
         addEventListener('scroll',function(){
-            mh.classList.toggle('stuck',scrollY>10);
-            tt.classList.toggle('show',scrollY>500);
+            if(mh)mh.classList.toggle('stuck',scrollY>10);
+            if(tt)tt.classList.toggle('show',scrollY>500);
         },{passive:true});
-        tt.onclick=function(){scrollTo({top:0,behavior:'smooth'})};
+        if(tt)tt.onclick=function(){scrollTo({top:0,behavior:'smooth'})};
 
         // Mobile menu
         var tog=d.getElementById('nav-toggle'), mm=d.getElementById('mobilemenu');
-        tog.onclick=function(){var o=mm.classList.toggle('open');tog.setAttribute('aria-expanded',o)};
-        mm.querySelectorAll('a').forEach(function(a){a.onclick=function(){mm.classList.remove('open')}});
+        if(tog&&mm){
+            tog.onclick=function(){var o=mm.classList.toggle('open');tog.setAttribute('aria-expanded',o)};
+            mm.querySelectorAll('a').forEach(function(a){a.onclick=function(){mm.classList.remove('open')}});
+        }
 
-        // Alto contraste + fonte (persistente)
+        // Alto contraste + fonte (persistente) — só liga se os botões existirem
         try{if(JSON.parse(localStorage.getItem('mb-hc')))d.body.classList.add('hc')}catch(e){}
-        d.getElementById('btn-hc').onclick=function(){var o=d.body.classList.toggle('hc');try{localStorage.setItem('mb-hc',JSON.stringify(o))}catch(e){}};
+        var btnHc=d.getElementById('btn-hc');
+        if(btnHc)btnHc.onclick=function(){var o=d.body.classList.toggle('hc');try{localStorage.setItem('mb-hc',JSON.stringify(o))}catch(e){}};
         var fs=parseInt(localStorage.getItem('mb-fs')||'0',10);
         function applyFs(){fs=Math.max(-2,Math.min(4,fs));d.documentElement.style.fontSize=(100+fs*8)+'%';localStorage.setItem('mb-fs',fs)}
         if(fs)applyFs();
         d.querySelectorAll('[data-font]').forEach(function(b){b.onclick=function(){fs+=b.dataset.font==='inc'?1:-1;applyFs()}});
 
-        // Contadores dos indicadores
+        // Contadores dos indicadores (setInterval: dispara mesmo com a aba em segundo plano)
         function animate(el){
-            var alvo=+el.dataset.count, dur=1300, ini=null,
-                pre=el.querySelector('span:first-child'), suf=el.querySelector('.suf');
-            function tick(ts){
-                if(!ini)ini=ts; var p=Math.min((ts-ini)/dur,1),
-                    val=Math.floor(p*alvo).toLocaleString('pt-BR');
+            if(el.dataset.done)return; el.dataset.done='1';
+            var alvo=+el.dataset.count,
+                pre=el.querySelector('span:first-child'), suf=el.querySelector('.suf'),
+                steps=28, i=0;
+            var timer=setInterval(function(){
+                i++;
+                var val=Math.round(alvo*Math.min(i/steps,1)).toLocaleString('pt-BR');
                 el.innerHTML=(pre?pre.outerHTML:'')+val+(suf?suf.outerHTML:'');
-                if(p<1)requestAnimationFrame(tick);
-            }
-            requestAnimationFrame(tick);
+                if(i>=steps)clearInterval(timer);
+            },45);
+        }
+        function verIndicadores(){
+            d.querySelectorAll('.indic-item .n').forEach(function(n){
+                var r=n.getBoundingClientRect();
+                if(r.top<innerHeight-30 && r.bottom>0) animate(n);
+            });
         }
         if('IntersectionObserver' in window){
-            var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){animate(e.target);io.unobserve(e.target)}})},{threshold:.4});
+            var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){animate(e.target);io.unobserve(e.target)}})},{threshold:.3});
             d.querySelectorAll('.indic-item .n').forEach(function(n){io.observe(n)});
         }
+        addEventListener('scroll',verIndicadores,{passive:true});
+        verIndicadores();
 
         // Abas de serviços (Cidadão / Empresa / Servidor)
         (function(){
@@ -750,6 +779,16 @@
             box.addEventListener('mouseleave',reset);
             go(0);reset();
         })();
+
+        // Dropdown do menu Governo (clique/toque + fora-fecha)
+        var dd=d.querySelector('.nav-dd');
+        if(dd){
+            var ddLink=dd.querySelector('a.has'), ddMenu=dd.querySelector('.nav-dd-menu');
+            if(ddLink&&ddMenu){
+                ddLink.addEventListener('click',function(e){e.preventDefault();var open=ddMenu.classList.toggle('open');ddLink.setAttribute('aria-expanded',open);});
+                d.addEventListener('click',function(e){if(!dd.contains(e.target)){ddMenu.classList.remove('open');ddLink.setAttribute('aria-expanded','false');}});
+            }
+        }
 
         // Smooth anchor
         d.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(function(a){
